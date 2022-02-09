@@ -3,3 +3,5 @@ test/
 
 #ignore possible asv from matlab
 *.asv
+
+.DS_Store
