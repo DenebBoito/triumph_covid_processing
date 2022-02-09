@@ -1,5 +1,5 @@
 #ignore the test files
-test/ 
+/test 
 
 #ignore possible asv from matlab
 *.asv
