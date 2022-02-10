@@ -36,10 +36,10 @@ for i in /home/denbo78/test_folder_covid_preproc/c* ; do
     mrconvert mdd_mc.mif mdd_eddy.nii.gz -export_grad_fsl eddybvecs.txt eddybvals.txt
 
     # in case AFNI complains, we reorient the brain
-    3dWarp -deoblique -prefix deobliqued.nii sag*.nii 
+    # 3dWarp -deoblique -prefix deobliqued.nii sag*.nii 
 
     # resample to convenient grid
-    3dresample -dxyz 0.5 0.5 0.5 -input deobliqued.nii -prefix anat_resampled.nii
+    3dresample -dxyz 0.5 0.5 0.5 -input sag*.nii -prefix anat_resampled.nii
 
     # run brain extraction with AFNI 
     3dSkullStrip -input anat_resampled.nii -prefix skullstripped.nii -orig_vol -fill_hole 10
