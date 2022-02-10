@@ -38,12 +38,11 @@ for i in /home/denbo78/test_folder_covid_preproc/c* ; do
     # in case AFNI complains, we reorient the brain
     3dWarp -deoblique -prefix deobliqued.nii sag*.nii 
 
-    # run brain extraction with AFNI (for now, FSL)
-    # bet sag*.nii skullstripped.nii
-    3dSkullStrip -input deobliqued.nii -prefix skullstripped.nii -orig_vol -fill_hole 10
+    # resample to convenient grid
+    3dresample -dxyz 0.5 0.5 0.5 -input deobliqued.nii -prefix anat_resampled.nii
 
-    # in case AFNI decided to rotate the anatomical while skullstripping, we rotate the original image as well
-    flirt -in deobliqued.nii -ref skullstripped.nii  -out flirted.nii
+    # run brain extraction with AFNI 
+    3dSkullStrip -input anat_resampled.nii -prefix skullstripped.nii -orig_vol -fill_hole 10
 
     # create a mean B0 for subsequent registration to anatomical
     dwiextract mdd_mc.mif - -bzero | mrmath - mean mean_bzero.mif -axis 3 
@@ -53,7 +52,7 @@ for i in /home/denbo78/test_folder_covid_preproc/c* ; do
     dwi2mask mdd_mc.mif -| maskfilter - dilate -| mrconvert - mdd_mask.nii
 
     # run the registration to get the transformation to be applied later
-    epi_reg --epi=mean_bzero.nii --t1=sag*.nii --t1brain=skullstripped.nii --out=out_epi_reg
+    epi_reg --epi=mean_bzero.nii --t1=anat_resampled.nii --t1brain=skullstripped.nii --out=out_epi_reg
     # this outputs a matrix file called out_epi_reg.mat which can be input to flirt to do the registration
     # flirt -ref flirted.nii -in map.nii -applyxfm -init out_epi_reg.mat -out reg_map
 
