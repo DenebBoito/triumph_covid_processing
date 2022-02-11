@@ -7,7 +7,7 @@
 #  - anatomical brain extraction
 #  - compute matrix for registration dwi2anatomical
 #
-
+# updated: 11/02/2022
 
 for i in /home/denbo78/test_folder_covid_preproc/* ; do
 

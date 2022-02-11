@@ -8,6 +8,8 @@
 #  - compute matrix for registration dwi2anatomical
 #
 # here we instead have a nice T1, so more straight forward processing applies
+#
+# Updated: 11/02/2022
 
 
 for i in /home/denbo78/test_folder_covid_preproc/p* ; do
