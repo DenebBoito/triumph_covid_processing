@@ -55,8 +55,8 @@ for i in /home/denbo78/test_folder_covid_preproc/c* ; do
 
     # run the registration to get the transformation to be applied later
     # for the controls, given that we have the T2 map, we need to run fast to get an appropriate wm segmentation
-    fast -t 2 -n 3 skullstrpped.nii
-    epi_reg --epi=mean_bzero.nii --t1=anat_resampled.nii --t1brain=skullstripped.nii --out=out_epi_reg --wmseg=skullstripped_pve_2.nii.
+    fast -t 2 -n 3 -o seg skullstripped.nii
+    epi_reg --epi=mean_bzero.nii --t1=anat_resampled.nii --t1brain=skullstripped.nii --out=out_epi_reg --wmseg=seg_pve_2.nii.gz
     # this outputs a matrix file called out_epi_reg.mat which can be input to flirt to do the registration
     # flirt -ref flirted.nii -in map.nii -applyxfm -init out_epi_reg.mat -out reg_map
 

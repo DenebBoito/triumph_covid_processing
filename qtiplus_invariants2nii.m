@@ -15,7 +15,7 @@ for i = 1 : n
     fieldvalue = getfield(dps, invs{i});
     
     % adjust for 4D images
-    if numel(size(fieldvalue)) > 4
+    if numel(size(fieldvalue)) > 3
         %         niftiwrite(fieldvalue, invs{i}, nii_h_mod);
         continue
     else

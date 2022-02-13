@@ -10,11 +10,11 @@ d = d(~ismember({d.name}, {'.','..'}));
 %% loop through subjects
 for i = 1:numel(d)
    
-    path_tmp = strcat(subjs_path,'\',d(i).name);
+    path_tmp = strcat(subjs_path,'/',d(i).name);
     cd(path_tmp)
     
     % cd the temporary folder with copied file for pre/post processing
-    cd('processing')
+    cd('analysis')
     
     % run qti+ fit
     qtiplus_run_fit()

@@ -8,8 +8,7 @@ function qtiplus_run_fit()
 nii_h = niftiinfo('mean_bzero.nii');
 nii_h.Datatype = 'double';
 nii_h.BitsPerPixel = 64;
-nii_h.raw.datatype = 64;
-nii_h.raw.bitpix = 64;
+
 
 % load the preprocessed data and the mask computed with MRTrix
 data =  niftiread('mdd_eddy.nii.gz');
